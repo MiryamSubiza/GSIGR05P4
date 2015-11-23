@@ -39,6 +39,8 @@ public class PublicBussinessSystem extends BussinessSystem implements EventGatew
     @Override
     public Client getClient(Integer id) throws RemoteException {
         
+        // Uso el metodo ya implementado en bussinessSystem para eliminar el
+        // cliente
         return super.retrieveClient(id);
         
     }
@@ -46,81 +48,59 @@ public class PublicBussinessSystem extends BussinessSystem implements EventGatew
     @Override
     public Sales addFreeSale(Client c, Ticket t) throws RemoteException {
         
-        Calendar actualDate = Calendar.getInstance();
-        actualDate.setTime(new Date());
-        if (tickets.containsValue(t) && clients.containsValue(c) && !t.isSold()) {
+        // Añado la sale al sistema si es posible
+        if(super.addSale(t, c, 0.0f, c.getFirstCreditCard())){
             
-            // Si el cliente y el ticket existen y además el ticket no está vendido
-            // creamos la Sale
-            t.setSold(true);
-            Sales s = new Sales(t, c, 0, c.getFirstCreditCard(), new FechaCompleta(actualDate.get(Calendar.DAY_OF_MONTH), 
-                actualDate.get(Calendar.MONTH)+1, actualDate.get(Calendar.YEAR), 
-                actualDate.get(Calendar.HOUR), actualDate.get(Calendar.MINUTE)));
-            sales.add(s);
+            // Busco la sale que acabo de introducir al sistema para
+            // que el metodo la devuelvo
+            HashSet sales = super.getSales();
+            Iterator i = sales.iterator();
+            boolean salida = false;
+            Sales s = null;
+            while(i.hasNext() && !salida){
+                s = (Sales)i.next();
+                if(s.getTicket().equals(t) && s.getClient().equals(c) && s.getPrice() == 0.0f){
+                    salida = true;
+                }
+            }
             return s;
-            
         }
-        else
-            // Si el cliente o el ticket no existen en el sistema devolvemos
-            // nulo
+        else{
             return null;
+        }
         
     }
 
     @Override
     public Boolean removeSale(Sales s) throws RemoteException {
         
-        // Como no se nos indica nada, voy a considerar que si se anula una Sale
-        // el ticket vuelve a esta de nuevo a la venta de modo que no elimino el
-        // ticket asociado.
-        
-        // Pongo el ticket asociado de nuevo a la venta
-        Ticket t = s.getTicket();
-        t.setSold(true);
-        // Si se elimina correctamente devolvera true en caso
-        // contrario devolvera false
-        return sales.remove(s);
+        // Uso el metodo ya implementado en bussinessSystem para eliminar el
+        // Sales
+        return super.deleteSale(s);
         
     }
 
     @Override
     public Event[] getEvents(String name) throws RemoteException {
         
-        //Creamos un ArrayList porque un array no es dinámico
-        ArrayList <Event> al = new ArrayList();
-        Iterator i = concerts.values().iterator();
-        Iterator j = festivals.values().iterator();
-        Iterator z = exhibitions.values().iterator();
-
-        // Recorro todos los eventos mirando uno a uno si los nombres de los mismos
-        // tiene parcial o totalmente el nombre que me pasan como argumento y los guardo
-        // en el array de eventos
-        while (i.hasNext()) {
-            Concert concertAux = (Concert)i.next();
-            if (concertAux.getName().contains(name)) al.add(concertAux);
-        }
-        while (j.hasNext()){
-            Festival festivalAux = (Festival)j.next();
-            if (festivalAux.getName().contains(name)) al.add(festivalAux);
-            
-        }
-        while (z.hasNext()) {
-            Exhibition exhibitionAux = (Exhibition)z.next();
-            if (exhibitionAux.getName().contains(name)) al.add(exhibitionAux);
-        }
-        return (Event[]) al.toArray(new Event[al.size()]);
+        // Uso el metodo ya implementado en bussinessSystem para obtener el
+        // listado de eventos que coincidan parcialmente con el string dado
+        return super.retrieveEvents(name);
         
     }
 
     @Override
     public Concert getConcert(String name) throws RemoteException {
         
-        if(concerts.containsKey(name)){
-            // Si el concierto que buscamos existe lo devolvemos            
-            return concerts.get(name);
+        // Obtengo el evento con dicho nombre
+        Event e = super.getEvent(name);
+        if(e instanceof Concert){
+            // Con este if me aseguro que el evento con dicho nombre
+            // sea un concierto y lo devuelvo
+            return (Concert)e;
         }
         else{
-            // Si no existe devolvemos null
+            // En caso contrario devuelvo nulo
             return null;
         }
         
@@ -129,12 +109,17 @@ public class PublicBussinessSystem extends BussinessSystem implements EventGatew
     @Override
     public Festival getFestival(String name) throws RemoteException {
         
-        if(festivals.containsKey(name)){
-            // Si el festival que buscamos existe lo devolvemos            
-            return festivals.get(name);
+        // Obtengo el evento con dicho nombre
+        // Uso el metodo ya implementado en bussinessSystem para eliminar el
+        // concierto
+        Event e = super.getEvent(name);
+        if(e instanceof Festival){
+            // Con este if me aseguro que el evento con dicho nombre
+            // sea un festival y lo devuelvo
+            return (Festival)e;
         }
         else{
-            // Si no existe devolvemos null
+            // En caso contrario devuelvo nulo
             return null;
         }
         
@@ -160,12 +145,13 @@ public class PublicBussinessSystem extends BussinessSystem implements EventGatew
 
     @Override
     public Festival addConcertToFestival(String festivalName, Concert c) throws RemoteException {
-                
-        if(festivals.containsKey(festivalName)){
+        
+        Event e = super.getEvent(festivalName);        
+        if(e instanceof Festival){
             // Si el festival existe intento añadir el concierto y devuelvo
             // el festival actualizado
-            this.addConcertToFestival(festivals.get(festivalName), c);
-            return festivals.get(festivalName);
+            this.addConcertToFestival((Festival)e, c);
+            return (Festival)super.getEvent(festivalName);
         } 
         else {
             // En caso contrario devuelvo nulo
