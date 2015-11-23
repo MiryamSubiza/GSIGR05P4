@@ -41,7 +41,7 @@ import org.jopendocument.dom.spreadsheet.SpreadSheet;
  * @author izu.78236
  * @version 02/10/2015
  */
-public class BussinessSystem implements TicketOffice, XMLRepresentable, ClientGateway, EventGateway{
+public class BussinessSystem implements TicketOffice, XMLRepresentable{
     
     private HashMap <Integer, Client> clients;
     private HashSet <Sales> sales;
@@ -388,7 +388,6 @@ public class BussinessSystem implements TicketOffice, XMLRepresentable, ClientGa
      * @param name Full name of the event
      * @return The event that matches with the name given
      */
-    @Override
     public Event getEvent(String name){
         
         //Creamos un ArrayList porque un array no es dinámico
@@ -911,7 +910,20 @@ public class BussinessSystem implements TicketOffice, XMLRepresentable, ClientGa
         else return false;
     }
     
-    
+    public boolean deleteSale(Sales s){
+        
+        // Como no se nos indica nada, voy a considerar que si se anula una Sale
+        // el ticket vuelve a esta de nuevo a la venta de modo que no elimino el
+        // ticket asociado.
+        
+        // Pongo el ticket asociado de nuevo a la venta
+        Ticket t = s.getTicket();
+        t.setSold(false);
+        // Si se elimina correctamente devolvera true en caso
+        // contrario devolvera false
+        return sales.remove(s);
+        
+    }
     
     // Locations
     
