@@ -79,7 +79,8 @@ public class PublicBussinessSystem extends BussinessSystem implements EventGatew
         return super.deleteSale(s);
         
     }
-
+    
+    /*
     @Override
     public Event[] getEvents(String name) throws RemoteException {
         
@@ -88,6 +89,7 @@ public class PublicBussinessSystem extends BussinessSystem implements EventGatew
         return super.retrieveEvents(name);
         
     }
+    */
 
     @Override
     public Concert getConcert(String name) throws RemoteException {
