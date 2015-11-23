@@ -163,7 +163,22 @@ public class PublicBussinessSystem extends BussinessSystem implements EventGatew
     @Override
     public Boolean updateEvent(Event ev) throws RemoteException {
         
-        
+        if (ev instanceof Concert) {
+            Concert c = (Concert)ev;
+            replaceConcert(c);
+            return true;
+        }
+        else if (ev instanceof Exhibition) {
+            Exhibition e = (Exhibition)ev;
+            replaceExhibition(e);
+            return true;
+        }
+        else if (ev instanceof Festival) {
+            Festival f = (Festival)ev;
+            replaceFestival(f);
+            return true;
+        }
+        else return false;
         
     }
 
