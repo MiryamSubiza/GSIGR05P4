@@ -224,6 +224,7 @@ public class PublicBussinessSystem extends BussinessSystem implements EventGatew
         
         XStream xStream = new XStream(new DomDriver());
         xStream.alias("bussinessSystem", BussinessSystem.class);
+        xStream.alias("publicBussinessSystem", PublicBussinessSystem.class);
         xStream.alias("client", Client.class);
         xStream.alias("sales", Sales.class);
         xStream.alias("ticket", Ticket.class);
