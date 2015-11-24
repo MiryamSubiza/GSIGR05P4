@@ -165,22 +165,20 @@ public class PublicBussinessSystem extends BussinessSystem implements EventGatew
     @Override
     public Boolean updateEvent(Event ev) throws RemoteException {
         
+        // Distingo que tipo de evento es y una vez lo se uso el método
+        // de reemplazo o update correspondiente a dicho evento ya creado
+        // en la clase BussinessSystem
         if (ev instanceof Concert) {
-            Concert c = (Concert)ev;
-            replaceConcert(c);
-            return true;
+            return super.replaceConcert((Concert)ev);
         }
         else if (ev instanceof Exhibition) {
-            Exhibition e = (Exhibition)ev;
-            replaceExhibition(e);
-            return true;
+            return super.replaceExhibition((Exhibition)ev);
         }
         else if (ev instanceof Festival) {
-            Festival f = (Festival)ev;
-            replaceFestival(f);
-            return true;
+            return super.replaceFestival((Festival)ev);
         }
-        else return false;
+        else
+            return false;
         
     }
 
@@ -190,21 +188,30 @@ public class PublicBussinessSystem extends BussinessSystem implements EventGatew
         if(ev instanceof Concert){
             // Lo elimino con el método de eliminar conciertos
             // de la propia clase
-            return this.deleteConcert((Concert)ev);
+            return super.deleteConcert((Concert)ev);
         }
         else if(ev instanceof Festival){
             // Lo elimino con el método de eliminar festivales
             // de la propia clase
-            return this.deleteFestival((Festival)ev);
+            return super.deleteFestival((Festival)ev);
         }
         else if(ev instanceof Exhibition){
             // Lo elimino con el método de eliminar exhibiciones
             // de la propia clase
-            return this.deleteExhibition((Exhibition)ev);
+            return super.deleteExhibition((Exhibition)ev);
         }
         else{
             return false;
         }
+        
+    }
+
+    @Override
+    public Event[] getEvents(String name) throws RemoteException {
+        
+        // Uso el método ya implementado en BussinessSystem para obtener un
+        // array de eventos cuyo nombre contenga el string name
+        return super.retrieveEvents(name);
         
     }
 }
