@@ -17,6 +17,11 @@ import GSILabs.BModel.Location;
 import GSILabs.BModel.Sales;
 import GSILabs.BModel.Ticket;
 import GSILabs.connect.*;
+import GSILabs.persistence.XMLParsingException;
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.XStreamException;
+import com.thoughtworks.xstream.io.xml.DomDriver;
+import java.io.File;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -203,6 +208,40 @@ public class PublicBussinessSystem extends BussinessSystem implements EventGatew
         else{
             return false;
         }
+        
+    }
+    
+    /**
+     * Método para la lectura de ficheros
+     * @param f Fichero del cual voy a leer la información para crear los objetos
+     * @return Objeto BusinessSystem que contiene todos los objetos contenidos 
+     * en el fichero (si han podido ser deserializados)
+     * @throws XMLParsingException
+     */
+    public static PublicBussinessSystem parseXMLFile(File f) throws XMLParsingException {
+    
+        PublicBussinessSystem bs;
+        
+        XStream xStream = new XStream(new DomDriver());
+        xStream.alias("bussinessSystem", BussinessSystem.class);
+        xStream.alias("client", Client.class);
+        xStream.alias("sales", Sales.class);
+        xStream.alias("ticket", Ticket.class);
+        xStream.alias("artist", Artist.class);
+        xStream.alias("collective", Collective.class);
+        xStream.alias("concert", Concert.class);
+        xStream.alias("exhibition", Exhibition.class);
+        xStream.alias("festival", Festival.class);
+        xStream.alias("location", Location.class);
+        xStream.alias("fechacompleta", FechaCompleta.class);
+        
+        try {
+            bs = (PublicBussinessSystem)xStream.fromXML(f);
+        }
+        catch (XStreamException e){            
+            throw new XMLParsingException(e.getMessage(), f.getName());
+        }
+        return bs;
         
     }
    
