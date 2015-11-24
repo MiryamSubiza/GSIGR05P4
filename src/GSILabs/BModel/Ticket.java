@@ -14,6 +14,7 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
@@ -25,7 +26,7 @@ import java.util.Set;
  * @author izu.78236
  * @version 03/10/2015
  */
-public class Ticket implements XMLRepresentable {
+public class Ticket implements XMLRepresentable, Serializable {
     
     private Event event;
     //Clave: Identificador para una persona

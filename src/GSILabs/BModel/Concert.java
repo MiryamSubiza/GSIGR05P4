@@ -14,6 +14,7 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -22,7 +23,7 @@ import java.util.Date;
  * @author izu.78236
  * @version 03/10/2015
  */
-public class Concert implements ImpermanentEvent, XMLRepresentable {
+public class Concert implements ImpermanentEvent, XMLRepresentable, Serializable {
     
     private String concertName;
     private Performer p;

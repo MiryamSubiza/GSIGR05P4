@@ -14,6 +14,7 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.io.Serializable;
 
 /**
  * Extensión de la clase Date para poder obtener los días de las fechas
@@ -21,7 +22,7 @@ import java.io.PrintWriter;
  * @author izu.78236
  * @version 03/10/2015
  */
-public class FechaCompleta extends java.util.Date implements XMLRepresentable {
+public class FechaCompleta extends java.util.Date implements XMLRepresentable, Serializable {
     
     private int dia;
     private int mes;

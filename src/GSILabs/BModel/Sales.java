@@ -14,6 +14,7 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.io.Serializable;
 
 /**
  * Registro de la venta de una entrada a un cliente
@@ -21,7 +22,7 @@ import java.io.PrintWriter;
  * @author izu.78236
  * @version 03/10/2015
  */
-public class Sales implements XMLRepresentable {
+public class Sales implements XMLRepresentable, Serializable {
     
     private Ticket ticket;
     private Client client;

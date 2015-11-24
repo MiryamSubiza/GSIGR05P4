@@ -14,6 +14,7 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -24,7 +25,7 @@ import java.util.Iterator;
  * @author izu.78236
  * @version 1.0 (18/09/2015)
  */
-public class Client implements XMLRepresentable{
+public class Client implements XMLRepresentable, Serializable{
     
     private int id;
     private String dni;

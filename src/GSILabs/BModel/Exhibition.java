@@ -14,6 +14,7 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -25,7 +26,7 @@ import java.util.HashSet;
  * @author izu.78236
  * @version 03/10/2015
  */
-public class Exhibition implements LastingEvent, XMLRepresentable {
+public class Exhibition implements LastingEvent, XMLRepresentable, Serializable {
     
     private String exhibitionName;
     private String title;

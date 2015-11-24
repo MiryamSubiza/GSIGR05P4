@@ -13,6 +13,7 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -25,7 +26,7 @@ import java.util.Iterator;
  * @author izu.78236
  * @version 03/10/2015
  */
-public class Festival implements LastingEvent, XMLRepresentable {
+public class Festival implements LastingEvent, XMLRepresentable, Serializable {
 
     private HashSet <Concert> concerts;
     private FechaCompleta startDateFestival;

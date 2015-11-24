@@ -14,6 +14,7 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Iterator;
 
@@ -23,7 +24,7 @@ import java.util.Iterator;
  * @author izu.78236
  * @version 03/10/2015
  */
-public class Collective implements Performer, XMLRepresentable {
+public class Collective implements Performer, XMLRepresentable, Serializable {
     
     //Ha de ser una colección sin ordenación -> HashSet no tiene ordenación y no permite duplicados
     private HashSet <Artist> artists; // Todos los artistas que componen el colectivo

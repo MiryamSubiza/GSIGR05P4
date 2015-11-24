@@ -13,6 +13,7 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import java.io.File;
 import java.io.PrintWriter;
+import java.io.Serializable;
 
 /**
  * Información sobre localizaciones que son únicas
@@ -20,7 +21,7 @@ import java.io.PrintWriter;
  * @author izu.78236
  * @version 03/10/2015
  */
-public class Location implements XMLRepresentable{
+public class Location implements XMLRepresentable, Serializable{
     
     private String name;
     private int maxCapacity;
