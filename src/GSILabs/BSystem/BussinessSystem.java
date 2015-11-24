@@ -1392,6 +1392,7 @@ public class BussinessSystem implements TicketOffice, XMLRepresentable{
         XStream xStream = new XStream(new DomDriver());
         // Cambio el alias de la clase en XML
         xStream.alias("bussinessSystem", BussinessSystem.class);
+        xStream.alias("publicBussinessSystem", PublicBussinessSystem.class);
         xStream.alias("sales", Sales.class);
         xStream.alias("ticket", Ticket.class);
         xStream.alias("client", Client.class);
@@ -1399,7 +1400,9 @@ public class BussinessSystem implements TicketOffice, XMLRepresentable{
         xStream.alias("artist", Artist.class);
         xStream.alias("concert", Concert.class);
         xStream.alias("festival", Festival.class);
-        xStream.alias("exhibition", Exhibition.class);       
+        xStream.alias("exhibition", Exhibition.class); 
+        xStream.alias("collective", Collective.class);
+        xStream.alias("location", Location.class);
         String xml2 = xStream.toXML(this);
 
         return xml2;
