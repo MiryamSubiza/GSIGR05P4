@@ -9,7 +9,7 @@
 package GSILabs.BTesting;
 
 import GSILabs.BModel.*;
-import GSILabs.BSystem.BussinessSystem;
+import GSILabs.BSystem.*;
 import GSILabs.persistence.XMLParsingException;
 import java.io.File;
 import java.util.Iterator;
@@ -24,7 +24,7 @@ import java.util.Iterator;
 public class P01Tester {
     
     //Creación de una instancia de la clase GSILabs.BSystem.BusinessSystem
-    private static BussinessSystem bussinessSystem;
+    private static PublicBussinessSystem bussinessSystem;
     
     private static Artist[] artists = new Artist[11];
     private static Collective[] collectives = new Collective[5];
@@ -47,9 +47,9 @@ public class P01Tester {
     }
     
     //Introducir una cierta cantidad de eventos, clientes, entradas, etc.
-    public static BussinessSystem introduccionDatos () {
+    public static PublicBussinessSystem introduccionDatos () {
         
-        bussinessSystem = new BussinessSystem();
+        bussinessSystem = new PublicBussinessSystem();
         
         //Artists
         artists[0] = new Artist("Andrés Suárez", "Cantautor gallego", "www.andressuarez.es");
@@ -488,7 +488,7 @@ public class P01Tester {
         System.out.println("\nEJERCICO 2\n");
         System.out.println("Esto es una prueba del ejercicio 2 de la practica 3:");
         System.out.println(bussinessSystem.toXML());
-        File fichero = new File("bussinessSystem.xml");
+        File fichero = new File("publicBussinessSystem.xml");
         bussinessSystem.saveToXML(fichero);
     }        
     
