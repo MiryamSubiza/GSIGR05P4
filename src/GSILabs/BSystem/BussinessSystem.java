@@ -1462,7 +1462,7 @@ public class BussinessSystem implements TicketOffice, XMLRepresentable{
         BussinessSystem bs;
         
         XStream xStream = new XStream(new DomDriver());
-        xStream.alias("bussinessSystem", BussinessSystem.class);
+        xStream.alias("bussinessSystem", BussinessSystem.class);       
         xStream.alias("client", Client.class);
         xStream.alias("sales", Sales.class);
         xStream.alias("ticket", Ticket.class);
