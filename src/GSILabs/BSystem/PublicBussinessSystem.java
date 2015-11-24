@@ -80,7 +80,7 @@ public class PublicBussinessSystem extends BussinessSystem implements EventGatew
         
     }
     
-    /*
+    
     @Override
     public Event[] getEvents(String name) throws RemoteException {
         
@@ -89,7 +89,7 @@ public class PublicBussinessSystem extends BussinessSystem implements EventGatew
         return super.retrieveEvents(name);
         
     }
-    */
+    
 
     @Override
     public Concert getConcert(String name) throws RemoteException {
@@ -205,14 +205,6 @@ public class PublicBussinessSystem extends BussinessSystem implements EventGatew
         }
         
     }
-
-    @Override
-    public Event[] getEvents(String name) throws RemoteException {
-        
-        // Uso el método ya implementado en BussinessSystem para obtener un
-        // array de eventos cuyo nombre contenga el string name
-        return super.retrieveEvents(name);
-        
-    }
+   
 }
 
