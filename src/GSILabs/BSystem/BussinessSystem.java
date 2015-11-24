@@ -19,6 +19,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -41,7 +42,7 @@ import org.jopendocument.dom.spreadsheet.SpreadSheet;
  * @author izu.78236
  * @version 02/10/2015
  */
-public class BussinessSystem implements TicketOffice, XMLRepresentable{
+public class BussinessSystem implements TicketOffice, XMLRepresentable, Serializable{
     
     private HashMap <Integer, Client> clients;
     private HashSet <Sales> sales;
