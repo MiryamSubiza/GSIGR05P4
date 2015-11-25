@@ -46,20 +46,17 @@ public class BussinessServer {
             }
             System.out.println(e.getMessage()); 
         }        
-        ClientGateway stub1 =(ClientGateway) UnicastRemoteObject.exportObject(pBSystem,0);
-        //EventGateway stub2 =(EventGateway) UnicastRemoteObject.exportObject(pBSystem,0);
+        BussinessGateway stub1 =(BussinessGateway) UnicastRemoteObject.exportObject(pBSystem,0);        
         
         // Step 3- Creamos un registro en el puerto deseado y publicamos ahi los objetos,
         //  que serán accesibles en términos de interfaz bajo la etiqueta de "BussinessSystem"
         
         try{
             System.out.println("About to create the registries");
-            Registry reg1 = LocateRegistry.createRegistry(RMI_PORT1);
-            //Registry reg2 = LocateRegistry.createRegistry(RMI_PORT2);
-            System.out.println("Registry 1 create");
-            //System.out.println("Registry 2 create");
+            Registry reg1 = LocateRegistry.createRegistry(RMI_PORT1);            
+            System.out.println("Registry 1 create");            
             reg1.rebind("CLGateway", stub1);
-            //reg2.rebind("EVGateway", stub2);
+            reg1.rebind("EVGateway", stub1);
             System.out.println("Stub rebind done");
         }catch(RemoteException re){
              System.out.println("RMI Error in publishing the stub: "+re.getMessage());

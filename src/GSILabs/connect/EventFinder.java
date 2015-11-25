@@ -18,7 +18,7 @@ import java.rmi.RemoteException;
  * @author carlos.lopez
  * @version 1.0 (04/09/2015)
  */
-public interface EventFinder extends Remote {
+public interface EventFinder extends BussinessGateway {
    
     /**
      * Retrieves an Event that matches EXACTLY (up to the case and/or spacing),

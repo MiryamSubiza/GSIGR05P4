@@ -21,7 +21,7 @@ import java.rmi.RemoteException;
  * @author carlos.lopez
  * @version 1.0 (04/09/2015)
  */
-public interface EventGateway extends Remote,EventFinder{
+public interface EventGateway extends BussinessGateway, EventFinder{
     
     /**
      * Retrives a concert from the system by exact match of the name.

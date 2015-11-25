@@ -57,7 +57,10 @@ public class EVClient {
             // Paso 5 - Unir el objeto remoto como si fuera un objeto local
             EventGateway eGateway = (EventGateway) registry.lookup(objectTag);
             // Paso 6 - Usar el objeto
-            
+            System.out.println("Miro el concierto uno");
+            System.out.println(eGateway.getConcert("Concierto uno").toString());
+            System.out.println("Miro el festival uno");
+            System.out.println(eGateway.getFestival("Festival uno").toString());
         } catch (RemoteException | NotBoundException ex) {
             System.out.println("Exception in connection : "+ex.getMessage());
         }
