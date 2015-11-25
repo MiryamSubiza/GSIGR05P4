@@ -1,21 +1,13 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * This document is part of the lab material for the subject:
+ * Gestion de Sistemas de Informacion
+ * to be released at the
+ * Universidad Publica de Navarra
+ * during the first semester of the Academic Year 2015-2016
  */
 package GSILabs.BSystem;
 
-import GSILabs.BModel.Artist;
-import GSILabs.BModel.Client;
-import GSILabs.BModel.Collective;
-import GSILabs.BModel.Concert;
-import GSILabs.BModel.Event;
-import GSILabs.BModel.Exhibition;
-import GSILabs.BModel.FechaCompleta;
-import GSILabs.BModel.Festival;
-import GSILabs.BModel.Location;
-import GSILabs.BModel.Sales;
-import GSILabs.BModel.Ticket;
+import GSILabs.BModel.*;
 import GSILabs.connect.*;
 import GSILabs.persistence.XMLParsingException;
 import com.thoughtworks.xstream.XStream;
@@ -23,17 +15,16 @@ import com.thoughtworks.xstream.XStreamException;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import java.io.File;
 import java.rmi.RemoteException;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- *
- * @author Alex
+ * Implementación de los interfaces ClientGateway y EventGateway, 
+ * representando el acceso remoto a la información en modo de lectura
+ * y escritura de los clientes y eventos en el sistema.
+ * @author subiza.79082
+ * @author izu.78236
+ * @version 23/11/2015
  */
 public class PublicBussinessSystem extends BussinessSystem implements EventGateway, ClientGateway{        
     
@@ -84,7 +75,6 @@ public class PublicBussinessSystem extends BussinessSystem implements EventGatew
         return super.deleteSale(s);
         
     }
-    
     
     @Override
     public Event[] getEvents(String name) throws RemoteException {
