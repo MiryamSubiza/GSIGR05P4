@@ -1,11 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package GSILabs.connect;
 
-import GSILabs.BSystem.BussinessSystem;
 import GSILabs.BSystem.PublicBussinessSystem;
 import GSILabs.persistence.XMLParsingException;
 import java.io.File;
@@ -15,15 +9,20 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
 /**
- *
- * @author Alex
+ * Clase ejecutable que crea una instancia de PublicBusinessSystem,
+ * puebla dicha instancia vía xml y lo publica en un registro RMI 
+ * (puerto 1099) bajo dos identificadores diferentes CLGateway y 
+ * EVGateway.
+ * @author subiza.79082
+ * @author izu.78236
+ * @version 23/11/2015
  */
 public class BussinessServer {
     
     private static int RMI_PORT1=1099;
     private static int RMI_PORT2=1100;
     
-    public static void main(String[] args) throws RemoteException, XMLParsingException  {
+    public static void main(String[] args) throws RemoteException, XMLParsingException {
         
         // Paso 1- crear un Security Manager
         //  Comment if having troubles in publishing the object
@@ -48,18 +47,19 @@ public class BussinessServer {
         }        
         BussinessGateway stub1 =(BussinessGateway) UnicastRemoteObject.exportObject(pBSystem,0);        
         
-        // Step 3- Creamos un registro en el puerto deseado y publicamos ahi los objetos,
+        // Step 3- Creamos un registro en el puerto deseado y publicamos ahí los objetos,
         //  que serán accesibles en términos de interfaz bajo la etiqueta de "BussinessSystem"
         
-        try{
+        try {
             System.out.println("About to create the registries");
             Registry reg1 = LocateRegistry.createRegistry(RMI_PORT1);            
             System.out.println("Registry 1 create");            
             reg1.rebind("CLGateway", stub1);
             reg1.rebind("EVGateway", stub1);
             System.out.println("Stub rebind done");
-        }catch(RemoteException re){
-             System.out.println("RMI Error in publishing the stub: "+re.getMessage());
+        }
+        catch (RemoteException re) {
+            System.out.println("RMI Error in publishing the stub: "+re.getMessage());
         }
         
     }
