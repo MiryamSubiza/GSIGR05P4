@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package GSILabs.connect;
 
 import GSILabs.BModel.*;
@@ -15,8 +10,10 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
 /**
- *
- * @author Alex
+ * Clase ejecutable capaz de conectarse a un servidor.
+ * @author subiza.79082
+ * @author izu.78236
+ * @version 25/11/2015
  */
 public class EVClient {
     
