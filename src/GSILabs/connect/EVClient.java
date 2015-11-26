@@ -54,12 +54,25 @@ public class EVClient {
             // Paso 5 - Unir el objeto remoto como si fuera un objeto local
             EventGateway eGateway = (EventGateway) registry.lookup(objectTag);
             // Paso 6 - Usar el objeto
-            System.out.println("Miro el concierto uno");
-            System.out.println(eGateway.getConcert("Concierto uno").toString());
-            System.out.println("Miro el festival uno");
-            System.out.println(eGateway.getFestival("Festival uno").toString());
+            Concert c1 = eGateway.getConcert("Concierto uno");
+            System.out.println("Obtengo mediante el método getConcert el concierto con nombre: 'Concierto uno'\n" + c1);
+            
+            Festival f = eGateway.getFestival("Festival uno");
+            System.out.println("Obtengo mediante el método getFestival el festival con nombre: 'Festival uno'\n" + f);
+            
+            System.out.println("Elimino mediante el método removeConcert el concierto 'Concierto uno'\n" + eGateway.removeConcert(c1));
+            
+            Concert c2 = eGateway.getConcert("Concierto dos");
+            System.out.println("Añado un concierto a un festival en el que ya se encuentra:\n" + eGateway.addConcertToFestival("Festival uno", c2));
+                    
+            Concert c3 = eGateway.getConcert("Concierto tres");
+            System.out.println("Añado un concierto a un festival en el que no se encuentra:\n" + eGateway.addConcertToFestival("Festival uno", c3));
+            
+            System.out.println("Elimino mediante el método removeEvent el concierto 'Concierto tres'\n" + eGateway.removeEvent(c3));
+
+            
         } catch (RemoteException | NotBoundException ex) {
-            System.out.println("Exception in connection : "+ex.getMessage());
+            System.out.println("Exception in connection : " + ex.getMessage());
         }
         
     }
