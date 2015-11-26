@@ -45,7 +45,7 @@ public class BussinessServer {
             }
             System.out.println(e.getMessage()); 
         }        
-        BussinessGateway stub1 =(BussinessGateway) UnicastRemoteObject.exportObject(pBSystem,0);        
+        BussinessGateway stub1 =(BussinessGateway) UnicastRemoteObject.exportObject(pBSystem,RMI_PORT1);        
         
         // Step 3- Creamos un registro en el puerto deseado y publicamos ahí los objetos,
         //  que serán accesibles en términos de interfaz bajo la etiqueta de "BussinessSystem"
