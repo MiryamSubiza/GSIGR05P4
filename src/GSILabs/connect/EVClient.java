@@ -62,13 +62,11 @@ public class EVClient {
             
             System.out.println("Elimino mediante el método removeConcert el concierto 'Concierto uno'\n" + eGateway.removeConcert(c1));
             
-            Concert c2 = eGateway.getConcert("Concierto dos");
-            System.out.println("Añado un concierto a un festival en el que ya se encuentra:\n" + eGateway.addConcertToFestival("Festival uno", c2));
+            System.out.println("Añado un concierto a un festival en el que ya se encuentra:\n" + eGateway.addConcertToFestival("Festival uno", eGateway.getConcert("Concierto dos")));
                     
-            Concert c3 = eGateway.getConcert("Concierto tres");
-            System.out.println("Añado un concierto a un festival en el que no se encuentra:\n" + eGateway.addConcertToFestival("Festival uno", c3));
+            System.out.println("Añado un concierto a un festival en el que no se encuentra:\n" + eGateway.addConcertToFestival("Festival uno", eGateway.getConcert("Concierto tres")));
             
-            System.out.println("Elimino mediante el método removeEvent el concierto 'Concierto tres'\n" + eGateway.removeEvent(c3));
+            System.out.println("Elimino mediante el método removeEvent el concierto 'Concierto tres'\n" + eGateway.removeEvent(eGateway.getConcert("Concierto tres")));
 
             
         } catch (RemoteException | NotBoundException ex) {
