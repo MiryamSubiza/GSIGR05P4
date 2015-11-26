@@ -66,10 +66,10 @@ public class CLClient {
             
             Ticket t = new Ticket((Concert)e, 100, 3);
             Sales s = cGateway.addFreeSale(cli, t);
-            System.out.println("Verificamos que no se puede añadir una Sale a coste cero para un Ticket inexistente: " + s);
+            System.out.println("Verificamos que no se puede añadir una Sale a coste cero para un Ticket inexistente:\n" + s);
             
         } catch (RemoteException | NotBoundException ex) {
-            System.out.println("Exception in connection : "+ex.getMessage());
+            System.out.println("Exception in connection : " + ex.getMessage());
         }
         
     }
