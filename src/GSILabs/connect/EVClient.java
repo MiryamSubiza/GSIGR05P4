@@ -66,8 +66,12 @@ public class EVClient {
                     
             System.out.println("Añado un concierto a un festival en el que no se encuentra:\n" + eGateway.addConcertToFestival("Festival uno", eGateway.getConcert("Concierto tres")));
             
+            Concert c2 = new Concert("Concierto uno", c1.getPerformer(), new FechaCompleta("01/02/2020", "22:00"),
+                        new FechaCompleta("01/02/2020", "22:00"), new FechaCompleta("01/02/2020", "21:00"),
+                        new FechaCompleta("01/02/2020", "23:45"), c1.getLocation());
+            System.out.println("Actualizo la fecha de 'Concierto uno' de 2016 a 2020\n" + eGateway.updateEvent(c2));
+            
             System.out.println("Elimino mediante el método removeEvent el concierto 'Concierto tres'\n" + eGateway.removeEvent(eGateway.getConcert("Concierto tres")));
-
             
         } catch (RemoteException | NotBoundException ex) {
             System.out.println("Exception in connection : " + ex.getMessage());
