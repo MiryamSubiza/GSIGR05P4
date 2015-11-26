@@ -56,15 +56,18 @@ public class CLClient {
             ClientGateway cGateway = (ClientGateway) registry.lookup(objectTag);
             // Paso 6 - Usar el objeto
             Client cli = cGateway.getClient(11111111);
-            System.out.println("Mostramos el cliente con id 11111111:\n" + cli.toString());
+            System.out.println("Mostramos el cliente con id 11111111:\n" + cli);
             
             Event e = cGateway.getEvent("Concierto uno");
-            System.out.println("Obtengo mediante el método getEvent el evento con nombre: 'Concierto uno'\n" + e.toString());
+            System.out.println("Obtengo mediante el método getEvent el evento con nombre: 'Concierto uno'\n" + e);
             
             Event[] events = cGateway.getEvents("onci");
-            System.out.println("Obtengo mediante el método getEvents los eventos cuyos nombres contengan parcialmente: 'onci'\n" + Arrays.toString(events));
+            System.out.println("Obtengo mediante el método getEvents los eventos cuyos nombres contengan (parcialmente): 'onci'\n" + Arrays.toString(events));
             
-            //cGateway.addFreeSale(cli, t)
+            Ticket t = new Ticket((Concert)e, 100, 3);
+            Sales s = cGateway.addFreeSale(cli, t);
+            System.out.println("Verificamos que no se puede añadir una Sale a coste cero para un Ticket inexistente: " + s);
+            
         } catch (RemoteException | NotBoundException ex) {
             System.out.println("Exception in connection : "+ex.getMessage());
         }
