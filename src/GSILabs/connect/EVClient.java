@@ -50,7 +50,7 @@ public class EVClient {
         
         try {
             // Paso 4 -  Conectarse al registro remoto
-            Registry registry = LocateRegistry.getRegistry(remoteMachine);
+            Registry registry = LocateRegistry.getRegistry(remoteMachine, remotePort);
             // Paso 5 - Unir el objeto remoto como si fuera un objeto local
             EventGateway eGateway = (EventGateway) registry.lookup(objectTag);
             // Paso 6 - Usar el objeto
