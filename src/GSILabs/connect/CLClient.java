@@ -82,7 +82,7 @@ public class CLClient {
                 System.out.println("Exception in connection : " + ex.getMessage());
                 // Compruebo primero si la maquina no es accesible haciendole un ping
                 InetAddress ping = InetAddress.getByName(remoteMachine);
-                if(!ping.isReachable(5000)){ 
+                if(!ping.isReachable(5000)){
                     // La maquina no es accesible
                     System.out.println("El servidor no está disponible en estos momentos.\nEspere unos minutos y vuelva a intentarlo"); 
                 }else { 

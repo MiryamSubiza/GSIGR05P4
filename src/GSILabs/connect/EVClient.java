@@ -17,7 +17,7 @@ import java.rmi.registry.Registry;
  */
 public class EVClient {
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, RemoteException, NotBoundException {
         
         // Paso 1- Leer por teclado la dirección remota de la máquina        
         System.out.print("Por favor introduzca la dirección de la máquina: ");
@@ -54,28 +54,83 @@ public class EVClient {
             // Paso 5 - Unir el objeto remoto como si fuera un objeto local
             EventGateway eGateway = (EventGateway) registry.lookup(objectTag);
             // Paso 6 - Usar el objeto
-            Concert c1 = eGateway.getConcert("Concierto uno");
-            System.out.println("Obtengo mediante el método getConcert el concierto con nombre: 'Concierto uno'\n" + c1);
-            
-            Festival f = eGateway.getFestival("Festival uno");
-            System.out.println("Obtengo mediante el método getFestival el festival con nombre: 'Festival uno'\n" + f);
-            
-            System.out.println("Elimino mediante el método removeConcert el concierto 'Concierto uno'\n" + eGateway.removeConcert(c1));
-            
-            System.out.println("Añado un concierto a un festival en el que ya se encuentra:\n" + eGateway.addConcertToFestival("Festival uno", eGateway.getConcert("Concierto dos")));
+            boolean fin  = false;
+            while(!fin){
+                System.out.println("\nEVENT CLIENT MENU");
+                System.out.println("   1- Ejemplo de todos los métodos del a interfaz");                
+                System.out.println("   2- Remove event");
+                System.out.println("   3- Update event");
+                System.out.println("   4- Salir");
+                System.out.print("Elija una de las siguientes opciones: ");
+                int respuesta;
+                respuesta = Integer.parseInt(br.readLine());
+                switch(respuesta){
+                    case 1:
+                        pruebasMetodosInterfaz(eGateway);
+                        break;
                     
-            System.out.println("Añado un concierto a un festival en el que no se encuentra:\n" + eGateway.addConcertToFestival("Festival uno", eGateway.getConcert("Concierto tres")));
-            
-            Concert c2 = new Concert("Concierto uno", c1.getPerformer(), new FechaCompleta("01/02/2020", "22:00"),
-                        new FechaCompleta("01/02/2020", "22:00"), new FechaCompleta("01/02/2020", "21:00"),
-                        new FechaCompleta("01/02/2020", "23:45"), c1.getLocation());
-            System.out.println("Actualizo la fecha de 'Concierto uno' de 2016 a 2020\n" + eGateway.updateEvent(c2));
-            
-            System.out.println("Elimino mediante el método removeEvent el concierto 'Concierto tres'\n" + eGateway.removeEvent(eGateway.getConcert("Concierto tres")));
-            
+                    case 2:
+                        System.out.println("\nElimino el concierto de nombre 'Concierto seis'");                        
+                        if(eGateway.removeEvent(eGateway.getConcert("Concierto seis"))){
+                            System.out.println("Ha sido eliminado correctamente\n");
+                        }
+                        else{
+                            System.out.println("ERROR: No se ha podido eliminar correctamente\n");
+                        }
+                        break;
+                        
+                    case 3:
+                        System.out.println("\nActualizo el concierto de nombre 'Concierto seis' cambiandole la localizacion");
+                        Artist art = new Artist("R de Rumba", "Rubén Cuevas, DJ zaragozano");
+                        Location loc1 = new Location("Palacio de deportes", 15500, "Madrid");
+                        // Este concierto es el mismo que el tres pero le cambio la localizacion
+                        Concert conUpdated = new Concert("Concierto seis", art, new FechaCompleta("02/06/2016", "21:15"),
+                        new FechaCompleta("02/06/2016", "21:15"), new FechaCompleta("02/06/2016", "20:15"),
+                        new FechaCompleta("02/06/2016", "23:50"), loc1);
+                        if(eGateway.updateEvent(conUpdated)){
+                            System.out.println("Ha sido actualizado correctamente\n");
+                        }
+                        else{
+                            System.out.println("ERROR: No se ha podido actualizar correctamente\n");
+                        }
+                        break;
+                        
+                    case 4:
+                        // De este modo saldremos del bucle while
+                        fin = true;
+                        
+                    default:
+                        System.out.println("Opción incorrecta, vuelva a intentarlo.");
+                        
+                }
+                
+            }
         } catch (RemoteException | NotBoundException ex) {
             System.out.println("Exception in connection : " + ex.getMessage());
         }
+        
+    }
+    
+    private static void pruebasMetodosInterfaz(EventGateway ev) throws RemoteException{
+        
+        Concert c1 = ev.getConcert("Concierto uno");
+        System.out.println("Obtengo mediante el método getConcert el concierto con nombre: 'Concierto uno'\n" + c1);
+
+        Festival f = ev.getFestival("Festival uno");
+        System.out.println("Obtengo mediante el método getFestival el festival con nombre: 'Festival uno'\n" + f);
+
+        System.out.println("Elimino mediante el método removeConcert el concierto 'Concierto uno'\n" + ev.removeConcert(c1));
+
+        System.out.println("Añado un concierto a un festival en el que ya se encuentra:\n" + ev.addConcertToFestival("Festival uno", ev.getConcert("Concierto dos")));
+
+        System.out.println("Añado un concierto a un festival en el que no se encuentra:\n" + ev.addConcertToFestival("Festival uno", ev.getConcert("Concierto tres")));
+
+        Concert c2 = new Concert("Concierto uno", c1.getPerformer(), new FechaCompleta("01/02/2020", "22:00"),
+                    new FechaCompleta("01/02/2020", "22:00"), new FechaCompleta("01/02/2020", "21:00"),
+                    new FechaCompleta("01/02/2020", "23:45"), c1.getLocation());
+        System.out.println("Actualizo la fecha de 'Concierto uno' de 2016 a 2020\n" + ev.updateEvent(c2));
+
+        System.out.println("Elimino mediante el método removeEvent el concierto 'Concierto tres'\n" + ev.removeEvent(ev.getConcert("Concierto tres")));
         
     }
     
