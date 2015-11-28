@@ -85,10 +85,16 @@ public class CLClient {
                 if(!ping.isReachable(5000)){
                     // La maquina no es accesible
                     System.out.println("El servidor no está disponible en estos momentos.\nEspere unos minutos y vuelva a intentarlo"); 
-                }else { 
+                }else if(remotePort != 1099){ 
                     // La maquina es accesible
                     System.out.println("El puerto que ha introducido es incorrecto.Vuelva a intentarlo");
-
+                }
+                else if(!objectTag.equalsIgnoreCase("CLGateway")){
+                    // La etiqueta del objeto al que llama no existe en el servidor
+                    System.out.println("La etiqueta del objeto que solicita no existe. Vuelva a intentarlo");
+                }
+                else{
+                    System.out.println("La maquina a la que hace referencia no existe. Vuelva a intentarlo");
                 }
 
             }
